@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaGraduationCap } from 'react-icons/fa';
 
 const Education = () => {
   const educationData = [
