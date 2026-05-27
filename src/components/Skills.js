@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaReact, FaNode, FaDatabase, FaPhp, FaPython, FaGit } from 'react-icons/fa';
-import { SiMongodb, SiLaravel, SiDjango, SiTailwindcss } from 'react-icons/si';
+import { FaReact, FaNode, FaDatabase, FaPhp, FaPython, FaGit, FaLock } from 'react-icons/fa';
+import { SiMongodb, SiLaravel, SiDjango, SiTailwindcss, SiStripe, SiRazorpay, SiSocketdotio } from 'react-icons/si';
 
 const Skills = () => {
   const skillCategories = [
@@ -33,10 +33,10 @@ const Skills = () => {
     {
       category: 'Specializations',
       skills: [
-        'JWT Authentication',
-        'Stripe Integration',
-        'Razorpay Integration',
-        'Socket.io',
+        { name: 'JWT Authentication', icon: <FaLock className="text-yellow-400" /> },
+        { name: 'Stripe Integration', icon: <SiStripe className="text-indigo-400" /> },
+        { name: 'Razorpay Integration', icon: <SiRazorpay className="text-blue-400" /> },
+        { name: 'Socket.io', icon: <SiSocketdotio className="text-slate-300" /> },
       ],
     },
   ];

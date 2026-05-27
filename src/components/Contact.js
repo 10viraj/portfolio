@@ -21,22 +21,18 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const web3FormsAccessKey = "721301de-481a-4210-b595-8029ebef5b64";
     setIsSubmitting(true);
-
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("http://localhost:5000/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: web3FormsAccessKey,
           name: formData.name,
           email: formData.email,
           message: formData.message,
-          subject: `Portfolio Contact from ${formData.name}`,
         }),
       });
 
