@@ -23,7 +23,12 @@ const Contact = () => {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch("/api/contact", {
+      // Automatically switch between local server and Vercel Serverless Function
+      const endpoint = process.env.NODE_ENV === 'production' 
+        ? '/api/contact' 
+        : 'http://localhost:5000/api/contact';
+
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
