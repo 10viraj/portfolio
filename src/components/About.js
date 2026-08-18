@@ -3,8 +3,8 @@ import { FaCode, FaRocket, FaLightbulb } from 'react-icons/fa';
 
 const About = () => {
   const highlights = [
-    { icon: <FaCode />, title: 'Full Stack Development', desc: 'Expert in React, Node.js, and MongoDB' },
-    { icon: <FaRocket />, title: 'Performance Focused', desc: 'Building fast, scalable applications' },
+    { icon: <FaCode />, title: 'Backend Development', desc: 'Expert in PHP, Laravel, and MySQL' },
+    { icon: <FaRocket />, title: 'Performance Focused', desc: 'Building fast, scalable APIs' },
     { icon: <FaLightbulb />, title: 'Problem Solver', desc: 'Creative solutions for complex challenges' },
   ];
 
@@ -14,10 +14,10 @@ const About = () => {
         <div className="max-w-3xl mx-auto mb-20">
           <h2 className="text-headline-lg mb-8 text-center text-white">About Me</h2>
           <p className="text-body-lg text-slate-300 mb-8 animate-fade-in-up">
-            I'm a dedicated Full Stack Developer with a passion for building scalable, user-centric web applications. With expertise in the MERN stack, I've successfully delivered projects ranging from e-commerce platforms to real-time streaming applications.
+            I'm a dedicated Backend Developer with a passion for building scalable, reliable web applications. With expertise in the Laravel ecosystem, I've successfully delivered projects ranging from complex APIs to data-intensive backend platforms.
           </p>
           <p className="text-body-lg text-slate-300 animate-fade-in-up">
-            My approach combines clean code practices, modern development patterns, and a deep understanding of user experience. I believe in continuous learning and staying ahead of technology trends to deliver innovative solutions.
+            My approach combines clean code practices, MVC architecture patterns, and a deep understanding of database design. I believe in continuous learning and staying ahead of technology trends to deliver innovative solutions.
           </p>
         </div>
           

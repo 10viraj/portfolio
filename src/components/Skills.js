@@ -5,6 +5,22 @@ import { SiMongodb, SiLaravel, SiDjango, SiTailwindcss, SiStripe, SiRazorpay, Si
 const Skills = () => {
   const skillCategories = [
     {
+      category: 'Backend & Frameworks',
+      skills: [
+        { name: 'Laravel', icon: <SiLaravel className="text-red-500" /> },
+        { name: 'PHP', icon: <FaPhp className="text-indigo-400" /> },
+        { name: 'Node.js', icon: <FaNode className="text-green-400" /> },
+      ],
+    },
+    {
+      category: 'Database & Tools',
+      skills: [
+        { name: 'MySQL & DBMS', icon: <FaDatabase className="text-blue-400" /> },
+        { name: 'MongoDB', icon: <SiMongodb className="text-green-500" /> },
+        { name: 'Git & GitHub', icon: <FaGit className="text-orange-400" /> },
+      ],
+    },
+    {
       category: 'Frontend',
       skills: [
         { name: 'React', icon: <FaReact className="text-blue-400" /> },
@@ -13,30 +29,11 @@ const Skills = () => {
       ],
     },
     {
-      category: 'Backend',
-      skills: [
-        { name: 'Node.js', icon: <FaNode className="text-green-400" /> },
-        { name: 'Laravel', icon: <SiLaravel className="text-red-400" /> },
-        { name: 'Django', icon: <SiDjango className="text-green-500" /> },
-        { name: 'PHP', icon: <FaPhp className="text-purple-400" /> },
-      ],
-    },
-    {
-      category: 'Database & Tools',
-      skills: [
-        { name: 'MongoDB', icon: <SiMongodb className="text-green-400" /> },
-        { name: 'SQL & DBMS', icon: <FaDatabase className="text-blue-400" /> },
-        { name: 'Git & GitHub', icon: <FaGit className="text-orange-400" /> },
-        { name: 'Python', icon: <FaPython className="text-yellow-400" /> },
-      ],
-    },
-    {
       category: 'Specializations',
       skills: [
-        { name: 'JWT Authentication', icon: <FaLock className="text-yellow-400" /> },
+        { name: 'REST APIs & JWT', icon: <FaLock className="text-yellow-400" /> },
         { name: 'Stripe Integration', icon: <SiStripe className="text-indigo-400" /> },
         { name: 'Razorpay Integration', icon: <SiRazorpay className="text-blue-400" /> },
-        { name: 'Socket.io', icon: <SiSocketdotio className="text-slate-300" /> },
       ],
     },
   ];

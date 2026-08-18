@@ -23,10 +23,10 @@ const Hero = () => {
               <span className="block text-5xl md:text-7xl font-extrabold leading-tight bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">Viraj Somani</span>
             </h1>
 
-            <p className="text-lg md:text-2xl text-slate-300 mb-6 animate-fade-in-up font-medium tracking-wide">Full Stack Developer — React & Node.js Specialist</p>
+            <p className="text-lg md:text-2xl text-slate-300 mb-6 animate-fade-in-up font-medium tracking-wide">Backend Developer — Laravel & PHP Specialist</p>
 
             <p className="text-base md:text-lg text-slate-400 max-w-2xl mb-8 animate-fade-in-up leading-relaxed">
-              Building elegant, scalable web solutions with modern technologies. I focus on intuitive user experiences and robust backend systems to deliver measurable results.
+              Building elegant, scalable web solutions with modern technologies. I specialize in the Laravel ecosystem, focusing on robust APIs, complex backend systems, and efficient database architectures.
             </p>
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-start gap-4 sm:gap-6 animate-fade-in-up">
