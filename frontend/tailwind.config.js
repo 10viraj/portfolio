@@ -7,24 +7,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#3b82f6',
-        secondary: '#06b6d4',
+        brand: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+        },
       },
       fontFamily: {
-        sans: ['Sora', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['Inter', 'Sora', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         display: ['Poppins', 'sans-serif'],
-      },
-      spacing: {
-        '128': '32rem',
-      },
-      borderRadius: {
-        '3xl': '1.5rem',
-      },
-      backdropBlur: {
-        'xl': '16px',
       },
     },
   },
   plugins: [],
 };
-

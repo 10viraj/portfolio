@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaDownload } from 'react-icons/fa';
 
 const Header = ({ scrollToSection }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,174 +7,121 @@ const Header = ({ scrollToSection }) => {
   const menuItems = [
     { label: 'Home', id: 'home' },
     { label: 'About', id: 'about' },
-    { label: 'Education', id: 'education' },
     { label: 'Experience', id: 'experience' },
     { label: 'Skills', id: 'skills' },
     { label: 'Projects', id: 'projects' },
     { label: 'Contact', id: 'contact' },
   ];
 
+  const handleNavClick = (id) => {
+    scrollToSection(id);
+    setIsOpen(false);
+  };
+
   return (
-    <header className="sticky top-0 z-50" style={{
-      fontFamily: "'DM Sans', sans-serif",
-      background: 'linear-gradient(180deg, rgba(8,14,28,0.98) 0%, rgba(10,18,35,0.92) 100%)',
-      borderBottom: '0.5px solid rgba(100,140,255,0.18)',
-      backdropFilter: 'blur(18px)',
-      boxShadow: '0 1px 32px rgba(0,0,0,0.35), 0 0 0 0.5px rgba(80,120,255,0.08) inset',
-      position: 'relative',
-    }}>
-      {/* Top shimmer line */}
-      <div style={{
-        position: 'absolute', top: 0, left: 0, right: 0, height: '1px',
-        background: 'linear-gradient(90deg, transparent 0%, rgba(99,179,255,0.4) 30%, rgba(56,220,200,0.4) 70%, transparent 100%)',
-      }} />
-
-      <div className="max-w-6xl mx-auto px-6" style={{ height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        {/* Logo */}
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all">
+      <div className="container mx-auto flex items-center justify-between h-16">
+        {/* Brand Logo */}
         <button
-          onClick={() => scrollToSection('home')}
-          style={{
-            fontFamily: "'Syne', sans-serif",
-            fontSize: '1.15rem',
-            fontWeight: 600,
-            background: 'linear-gradient(120deg, #63b3ff 0%, #38dcc8 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            letterSpacing: '0.01em',
-            border: 'none',
-            backgroundColor: 'transparent',
-            cursor: 'pointer',
-            transition: 'opacity 0.2s',
-          }}
-          onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
-          onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+          onClick={() => handleNavClick('home')}
+          className="text-left group flex items-center gap-2 cursor-pointer focus:outline-none"
+          aria-label="Viraj Somani Home"
         >
-          Viraj Somani
+          <span className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors">
+            Viraj Somani
+          </span>
+          <span className="hidden sm:inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200/60">
+            Full-Stack Dev
+          </span>
         </button>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex" style={{ gap: '2px' }}>
-          {menuItems.map((item) => (
-            <NavButton key={item.id} onClick={() => scrollToSection(item.id)}>
-              {item.label}
-            </NavButton>
-          ))}
-        </nav>
-
-        {/* Social icons (desktop) */}
-        
-
-        {/* CTA */}
-        <button
-          className="hidden md:block"
-          onClick={() => scrollToSection('contact')}
-          style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: '0.78rem',
-            fontWeight: 500,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: '#0a0e1c',
-            border: 'none',
-            background: 'linear-gradient(120deg, #63b3ff 0%, #38dcc8 100%)',
-            padding: '8px 18px',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            transition: 'opacity 0.2s, transform 0.15s',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
-          onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'translateY(0)'; }}
-        >
-          Contact
-        </button>
-
-        {/* Hamburger */}
-        <button
-          className="md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle navigation"
-          style={{
-            background: 'none', border: 'none', cursor: 'pointer',
-            color: 'rgba(180,200,230,0.8)', padding: '6px',
-          }}
-        >
-          {isOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
-        </button>
-      </div>
-
-      {/* Mobile Nav */}
-      {isOpen && (
-        <nav className="md:hidden" style={{
-          background: 'rgba(8,14,28,0.97)',
-          borderTop: '0.5px solid rgba(100,140,255,0.15)',
-          padding: '1rem 1.5rem 1.25rem',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '4px',
-        }}>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-1 lg:gap-2">
           {menuItems.map((item) => (
             <button
               key={item.id}
-              onClick={() => { scrollToSection(item.id); setIsOpen(false); }}
-              style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                textAlign: 'left',
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: '0.85rem',
-                fontWeight: 400,
-                color: 'rgba(180,200,230,0.75)',
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                padding: '12px 0',
-                borderBottom: '0.5px solid rgba(100,140,255,0.08)',
-                width: '100%',
-                transition: 'color 0.2s, padding-left 0.2s',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.color = 'rgba(99,179,255,0.95)'; e.currentTarget.style.paddingLeft = '8px'; }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(180,200,230,0.75)'; e.currentTarget.style.paddingLeft = '0'; }}
+              onClick={() => handleNavClick(item.id)}
+              className="px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-all"
             >
               {item.label}
             </button>
           ))}
         </nav>
+
+        {/* Desktop Action Buttons */}
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="/Viraj_Somani_Resume.pdf"
+            download="Viraj_Somani_Resume.pdf"
+            className="inline-flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-blue-600 px-3.5 py-1.5 rounded-lg border border-slate-300 hover:border-blue-400 bg-white transition-all shadow-xs"
+          >
+            <FaDownload className="text-xs text-blue-600" />
+            <span>Resume</span>
+          </a>
+
+          <button
+            onClick={() => handleNavClick('contact')}
+            className="inline-flex items-center text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-4 py-1.5 rounded-lg transition-colors shadow-xs"
+          >
+            Hire Me
+          </button>
+        </div>
+
+        {/* Mobile Hamburger Button */}
+        <div className="flex md:hidden items-center gap-2">
+          <a
+            href="/Viraj_Somani_Resume.pdf"
+            download="Viraj_Somani_Resume.pdf"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 px-2.5 py-1 rounded-md border border-blue-200 bg-blue-50"
+          >
+            <FaDownload className="text-2xs" />
+            Resume
+          </a>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 text-slate-700 hover:text-blue-600 rounded-lg hover:bg-slate-100 transition-colors focus:outline-none"
+            aria-label="Toggle navigation menu"
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Dropdown */}
+      {isOpen && (
+        <div className="md:hidden border-t border-slate-200 bg-white px-4 py-3 shadow-lg animate-fade-in">
+          <nav className="flex flex-col space-y-1">
+            {menuItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className="text-left w-full px-3 py-2.5 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors"
+              >
+                {item.label}
+              </button>
+            ))}
+            <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+              <a
+                href="/Viraj_Somani_Resume.pdf"
+                download="Viraj_Somani_Resume.pdf"
+                className="w-full text-center inline-flex items-center justify-center gap-2 text-sm font-medium py-2 rounded-lg border border-slate-300 text-slate-700 bg-slate-50"
+              >
+                <FaDownload className="text-xs text-blue-600" />
+                Download Resume (PDF)
+              </a>
+              <button
+                onClick={() => handleNavClick('contact')}
+                className="w-full text-center text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 py-2 rounded-lg"
+              >
+                Contact Me
+              </button>
+            </div>
+          </nav>
+        </div>
       )}
     </header>
-  );
-};
-
-// Extracted nav button with hover underline effect
-const NavButton = ({ onClick, children }) => {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <button
-      onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: 'none', border: 'none', cursor: 'pointer',
-        fontFamily: "'DM Sans', sans-serif",
-        fontSize: '0.8rem',
-        fontWeight: 400,
-        color: hovered ? 'rgba(220,235,255,0.95)' : 'rgba(180,200,230,0.75)',
-        padding: '8px 14px',
-        borderRadius: '6px',
-        letterSpacing: '0.06em',
-        textTransform: 'uppercase',
-        position: 'relative',
-        transition: 'color 0.2s',
-      }}
-    >
-      {children}
-      <span style={{
-        position: 'absolute', bottom: '4px', left: '14px', right: '14px',
-        height: '1.5px',
-        background: 'linear-gradient(90deg, #63b3ff, #38dcc8)',
-        borderRadius: '2px',
-        transform: hovered ? 'scaleX(1)' : 'scaleX(0)',
-        transformOrigin: 'left',
-        transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)',
-      }} />
-    </button>
   );
 };
 

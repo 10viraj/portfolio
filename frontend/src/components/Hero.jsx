@@ -1,52 +1,124 @@
 import React from 'react';
-import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight, FaDownload, FaMapMarkerAlt, FaCheckCircle, FaGithub, FaEnvelope } from 'react-icons/fa';
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 relative overflow-hidden pt-24 pb-24">
-      {/* Decorative background blobs */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-20 -right-6 w-96 h-96 bg-blue-600/6 rounded-full blur-3xl animate-soft-float" />
-        <div className="absolute bottom-10 -left-20 w-72 h-72 bg-cyan-500/6 rounded-full blur-3xl animate-soft-float" style={{ animationDelay: '1.6s' }} />
-      </div>
-
-      <div className="container mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          {/* Left: Content */}
-          <div className="md:col-span-7 text-center md:text-left">
-            <div className="inline-block mb-6 animate-fade-in-up">
-              <span className="badge">Welcome to my portfolio</span>
+    <section className="relative bg-gradient-to-b from-slate-50 via-white to-white pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-slate-200/70">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          
+          {/* Left Column: Recruiter-Focused Value Proposition */}
+          <div className="lg:col-span-7 text-center lg:text-left">
+            {/* Immediate Availability Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-semibold mb-6 shadow-xs animate-fade-in">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+              Available for Immediate Joining
             </div>
 
-            <h1 className="mb-4 animate-fade-in-up text-white">
-              <span className="block text-3xl md:text-4xl font-light">Hi, I'm</span>
-              <span className="block text-5xl md:text-7xl font-extrabold leading-tight bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">Viraj Somani</span>
+            {/* Greeting & Main Role Heading */}
+            <p className="text-base sm:text-lg font-medium text-slate-600 mb-1">
+              Hi, I'm <span className="font-semibold text-slate-900">Viraj Somani</span>
+            </p>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+              Full-Stack Developer
             </h1>
 
-            <p className="text-lg md:text-2xl text-slate-300 mb-6 animate-fade-in-up font-medium tracking-wide">Backend Developer — Laravel & PHP Specialist</p>
-
-            <p className="text-base md:text-lg text-slate-400 max-w-2xl mb-8 animate-fade-in-up leading-relaxed">
-              Building elegant, scalable web solutions with modern technologies. I specialize in the Laravel ecosystem, focusing on robust APIs, complex backend systems, and efficient database architectures.
+            {/* Supporting Tech Stack Line */}
+            <p className="text-lg sm:text-xl font-semibold text-blue-600 mb-5 tracking-normal">
+              React.js &bull; Node.js &bull; Laravel &bull; PHP &bull; REST APIs
             </p>
 
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-start gap-4 sm:gap-6 animate-fade-in-up">
-              <a href="#contact" className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-6 py-3 rounded-xl shadow-2xl transform hover:-translate-y-0.5 transition">
-                Get In Touch
-                <FaArrowRight className="ml-1" />
+            {/* Professional Description */}
+            <p className="text-base sm:text-lg text-slate-600 max-w-2xl mb-8 leading-relaxed mx-auto lg:mx-0">
+              Full-stack developer with hands-on experience building modern web applications, REST APIs, authentication systems and database-driven applications using React.js, Node.js, Laravel, PHP and MySQL.
+            </p>
+
+            {/* Clear CTA Buttons */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8">
+              <a
+                href="#projects"
+                className="btn-primary"
+              >
+                <span>View Projects</span>
+                <FaArrowRight className="text-xs" />
               </a>
 
-              <a href="#projects" className="inline-flex items-center justify-center border border-slate-700 text-slate-200 px-5 py-3 rounded-xl hover:bg-slate-800 transition">View My Work</a>
+              <a
+                href="/Viraj_Somani_Resume.pdf"
+                download="Viraj_Somani_Resume.pdf"
+                className="btn-secondary"
+              >
+                <FaDownload className="text-xs text-blue-600" />
+                <span>Download Resume</span>
+              </a>
+
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors text-sm sm:text-base font-medium"
+              >
+                Contact Me
+              </a>
+            </div>
+
+            {/* Quick Highlights / Location / Quick Links */}
+            <div className="pt-6 border-t border-slate-200/80 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs sm:text-sm text-slate-600">
+              <div className="flex items-center gap-1.5">
+                <FaMapMarkerAlt className="text-blue-600" />
+                <span>Ahmedabad, Gujarat, India</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <FaCheckCircle className="text-emerald-600" />
+                <span>8 Months Industry Internship</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://github.com/10viraj"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-500 hover:text-slate-900 transition-colors"
+                  aria-label="GitHub Profile"
+                >
+                  <FaGithub size={18} />
+                </a>
+                <a
+                  href="mailto:virajsomani10@gmail.com"
+                  className="text-slate-500 hover:text-blue-600 transition-colors"
+                  aria-label="Send Email"
+                >
+                  <FaEnvelope size={18} />
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Right: Decorative card */}
-          <div className="md:col-span-5 flex justify-center md:justify-end">
-            <div className="w-72 h-72 md:w-80 md:h-80 rounded-full bg-gradient-to-tr from-white/4 to-white/2 backdrop-blur-lg border border-white/6 shadow-xl flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-cyan-400/8 to-transparent opacity-60 animate-shimmer" />
-             <img loading="lazy" className="w-50 h-50 rounded-full border-9 border-white/20 " src="/viraj1.jpg" alt="Viraj Somani" />
+          {/* Right Column: Clean Profile Image & Key Metrics */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center">
+            <div className="relative">
+              {/* Outer clean border container */}
+              <div className="p-3 bg-white rounded-3xl shadow-lg border border-slate-200/80">
+                <img
+                  loading="eager"
+                  className="w-56 h-56 sm:w-64 sm:h-64 object-cover rounded-2xl"
+                  src="/viraj1.jpg"
+                  alt="Viraj Somani - Full-Stack Developer"
+                />
+              </div>
 
+              {/* Floating Quick Card: Role Focus */}
+              <div className="mt-4 bg-white/95 backdrop-blur-sm border border-slate-200/90 rounded-xl p-3.5 shadow-sm max-w-xs text-center sm:text-left">
+                <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">
+                  Target Roles
+                </p>
+                <p className="text-xs sm:text-sm font-medium text-slate-800 leading-snug">
+                  Full-Stack &bull; MERN &bull; Laravel/PHP &bull; Backend
+                </p>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>

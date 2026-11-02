@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&family=Sora:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,56 +10,71 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f172a 100%);
-  color: #e2e8f0;
-  min-height: 100vh;
-  letter-spacing: 0.3px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
 html {
   scroll-behavior: smooth;
 }
 
+body {
+  font-family: 'Inter', 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #ffffff;
+  color: #1e293b;
+  min-height: 100vh;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
 .container {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
 }
 
 /* Professional Typography */
 .text-headline-lg {
-  @apply text-5xl md:text-6xl font-bold tracking-tight;
+  @apply text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900;
 }
 
 .text-headline-md {
-  @apply text-3xl md:text-4xl font-bold tracking-tight;
+  @apply text-2xl sm:text-3xl font-bold tracking-tight text-slate-900;
 }
 
 .text-headline-sm {
-  @apply text-2xl md:text-3xl font-bold;
+  @apply text-xl sm:text-2xl font-bold text-slate-900;
 }
 
 .text-body-lg {
-  @apply text-lg leading-relaxed;
+  @apply text-base sm:text-lg leading-relaxed text-slate-600;
 }
 
 .text-body {
-  @apply text-base leading-relaxed;
+  @apply text-sm sm:text-base leading-relaxed text-slate-600;
 }
 
-/* Professional Animations */
-@keyframes fadeInUp {
+/* Subtle, performant animations */
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -67,114 +82,56 @@ html {
   }
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes subtleGlow {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3), 0 0 30px rgba(6, 182, 212, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(59, 130, 246, 0.5), 0 0 40px rgba(6, 182, 212, 0.2);
-  }
-}
-
-@keyframes softFloat {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.7s cubic-bezier(0.23, 1, 0.320, 1);
-}
-
-.animate-slide-in-left {
-  animation: slideInLeft 0.7s cubic-bezier(0.23, 1, 0.320, 1);
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.7s cubic-bezier(0.23, 1, 0.320, 1);
-}
-
-.animate-soft-float {
-  animation: softFloat 4s ease-in-out infinite;
-}
-
-.glow-effect {
-  animation: subtleGlow 3s ease-in-out infinite;
-}
-
-/* Professional Card */
+/* Clean Professional Components */
 .card-professional {
-  @apply bg-gradient-to-br from-slate-700/30 to-slate-800/40 backdrop-blur-xl border border-slate-600/40 rounded-2xl p-8 transition-all duration-300 hover:border-blue-500/40 hover:from-slate-700/50 hover:to-slate-800/60;
+  @apply bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-7 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-200;
 }
 
-/* Professional Button */
 .btn-primary {
-  @apply bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-600 text-white px-10 py-4 rounded-xl font-semibold shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0;
+  @apply inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl shadow-sm hover:shadow transition-all duration-200 text-sm sm:text-base;
 }
 
 .btn-secondary {
-  @apply border-2 border-slate-400/50 text-slate-200 px-10 py-4 rounded-xl font-semibold hover:bg-slate-700/50 hover:border-blue-400/50 hover:text-blue-400 transition-all duration-300;
+  @apply inline-flex items-center justify-center gap-2 border border-slate-300 hover:border-slate-400 bg-white hover:bg-slate-50 text-slate-700 font-medium px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl shadow-sm transition-all duration-200 text-sm sm:text-base;
 }
 
-/* Badge */
 .badge {
-  @apply inline-block bg-blue-500/15 text-blue-300 px-4 py-1.5 rounded-full text-xs font-semibold border border-blue-500/30 tracking-wide;
+  @apply inline-flex items-center gap-1.5 bg-blue-50 text-blue-700 border border-blue-200/70 px-3 py-1 rounded-full text-xs font-semibold tracking-wide;
 }
 
-/* Scroll smooth behavior */
-.scroll-smooth {
-  scroll-behavior: smooth;
+.badge-success {
+  @apply inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full text-xs font-semibold tracking-wide;
 }
 
-/* Custom scrollbar */
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Clean subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #3b82f6 0%, #06b6d4 100%);
-  border-radius: 10px;
-  border: 3px solid #0f172a;
+  background: #cbd5e1;
+  border-radius: 6px;
+  border: 2px solid #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #1d4ed8 0%, #0891b2 100%);
+  background: #94a3b8;
 }

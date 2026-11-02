@@ -9,6 +9,9 @@
     "dev:backend": "npm run dev --prefix backend",
     "build": "npm run build --prefix frontend"
   },
+  "dependencies": {
+    "nodemailer": "^6.9.13"
+  },
   "devDependencies": {
     "concurrently": "^8.2.2"
   }

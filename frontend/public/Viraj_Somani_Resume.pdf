@@ -1,0 +1,66 @@
+%PDF-1.4
+1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj
+2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj
+4 0 obj << /Length 2902 >> stream
+BT
+/F1 20 Tf 50 800 Td (VIRAJ SOMANI) Tj
+/F2 11 Tf 0 -20 Td (Full-Stack Developer | React.js | Node.js | Laravel | PHP) Tj
+/F2 9 Tf 0 -15 Td (Email: virajsomani10@gmail.com | Phone: +91 8780674650 | Ahmedabad, Gujarat, India) Tj
+/F2 9 Tf 0 -13 Td (GitHub: github.com/10viraj | Availability: Immediate Joiner) Tj
+0 -10 Td
+ET
+0.75 0.75 0.75 RG 1.5 w 50 735 m 545 735 l S
+BT
+/F1 12 Tf 50 715 Td (PROFESSIONAL SUMMARY) Tj
+/F2 9.5 Tf 0 -16 Td (Full-stack developer with 8 months of hands-on internship experience building modern web applications,) Tj
+0 -13 Td (REST APIs, authentication systems, and database-driven solutions using React.js, Node.js, Laravel, PHP,) Tj
+0 -13 Td (and MySQL. Immediate joiner actively seeking Full-Stack / MERN / Laravel developer opportunities.) Tj
+/F1 12 Tf 0 -24 Td (WORK EXPERIENCE) Tj
+/F1 10.5 Tf 0 -16 Td (Vibrant Coders - Laravel Backend Developer Intern) Tj
+/F2 9 Tf 0 -13 Td (Duration: 8 Months | Location: Ahmedabad, India) Tj
+0 -14 Td (- Developed Laravel MVC applications and reusable CRUD modules.) Tj
+0 -13 Td (- Built and integrated secure REST APIs for frontend client applications.) Tj
+0 -13 Td (- Worked with MySQL, Eloquent relationships, database query optimization, and validation.) Tj
+0 -13 Td (- Implemented authentication, authorization, and API security using JWT.) Tj
+0 -13 Td (- Debugged backend issues and tested endpoints using Postman and Laravel development tools.) Tj
+/F1 12 Tf 0 -24 Td (TECHNICAL SKILLS) Tj
+/F1 9.5 Tf 0 -16 Td (Frontend:) Tj
+/F2 9 Tf 65 0 Td (React.js, React Native, JavaScript [ES6+], HTML5, CSS3, Tailwind CSS) Tj
+/F1 9.5 Tf -65 -14 Td (Backend:) Tj
+/F2 9 Tf 65 0 Td (Node.js, Express.js, Laravel, PHP, REST APIs, JWT, CRUD, MVC, Socket.io) Tj
+/F1 9.5 Tf -65 -14 Td (Databases:) Tj
+/F2 9 Tf 65 0 Td (MySQL, MongoDB, Mongoose, Database Design & Optimization) Tj
+/F1 9.5 Tf -65 -14 Td (Tools & Other:) Tj
+/F2 9 Tf 65 0 Td (Git, GitHub, Postman, Figma, Stripe & Razorpay Integrations) Tj
+/F1 12 Tf -65 -24 Td (KEY PROJECTS) Tj
+/F1 10 Tf 0 -16 Td (1. Attendance Management System \(Laravel, PHP, MySQL, REST API\)) Tj
+/F2 9 Tf 0 -13 Td (- Role-based access control, attendance logging, automated reporting, and Eloquent relationships.) Tj
+/F1 10 Tf 0 -16 Td (2. Smart Diary \(React Native, Node.js, Express.js, MongoDB, JWT\)) Tj
+/F2 9 Tf 0 -13 Td (- Private journaling app with JWT auth, media & sketch support, categories, and analytics.) Tj
+/F1 10 Tf 0 -16 Td (3. Expense Tracker \(React.js, Express.js, REST API, JWT, Recharts\)) Tj
+/F2 9 Tf 0 -13 Td (- Financial management platform with monthly analytics charts, categories, and JWT auth.) Tj
+/F1 12 Tf 0 -24 Td (EDUCATION) Tj
+/F1 10 Tf 0 -16 Td (Master of Computer Application \(MCA\)) Tj
+/F2 9 Tf 0 -13 Td (Lok Jagruti University, Ahmedabad) Tj
+/F1 10 Tf 0 -16 Td (Bachelor of Computer Application \(BCA\)) Tj
+/F2 9 Tf 0 -13 Td (Lok Jagruti University, Ahmedabad) Tj
+ET
+endstream
+endobj
+3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >> endobj
+5 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> endobj
+6 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj
+xref
+0 8
+0000000000 65535 f 
+0000000000 00000 n 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000003069 00000 n 
+0000003205 00000 n 
+0000003280 00000 n 
+trailer << /Size 8 /Root 1 0 R >>
+startxref
+3350
+%%EOF
