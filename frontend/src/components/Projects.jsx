@@ -4,13 +4,13 @@ import { FaGithub } from 'react-icons/fa';
 const Projects = () => {
   const projects = [
     {
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce application with payment integration, product management, and user authentication.',
-      github: 'https://github.com/10viraj/E-commerce',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      color: 'from-blue-500 to-cyan-500',
-    },
-    {
+      //   title: 'E-Commerce Platform',
+      //   description: 'Full-stack e-commerce application with payment integration, product management, and user authentication.',
+      //   github: 'https://github.com/10viraj/E-commerce',
+      //   technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+      //   color: 'from-blue-500 to-cyan-500',
+      // },
+      // {
       title: 'Music Streaming App',
       description: 'Streaming platform with real-time updates, user authentication, and dynamic music library management.',
       github: 'https://github.com/10viraj/vibeStream',

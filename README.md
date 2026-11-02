@@ -1,80 +1,77 @@
 # Viraj Somani - Portfolio Website
 
-A modern, responsive portfolio website showcasing MERN stack development experience.
-
-## Features
-
-- **Responsive Design**: Mobile-first approach with responsive grid layouts
-- **Smooth Navigation**: Sticky header with smooth scrolling between sections
-- **Modern UI**: Built with Tailwind CSS for beautiful styling
-- **Sections Included**:
-  - Home/Hero section
-  - About me
-  - Education
-  - Work experience
-  - Technical skills with icons
-  - Project portfolio with links
-  - Contact form
-  - Footer with social links
-
-## Tech Stack
-
-- **Frontend**: React 18
-- **Styling**: Tailwind CSS
-- **Icons**: React Icons
-- **Responsiveness**: Mobile-first, mobile-to-desktop
-
-## Installation
-
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd portfolio
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm start
-```
-
-The application will open at `http://localhost:3000`
-
-## Available Scripts
-
-- `npm start` - Start development server
-- `npm build` - Build for production
-- `npm test` - Run tests
+A modern, responsive portfolio website showcasing fullstack development experience.
 
 ## Project Structure
 
 ```
-src/
-├── components/
-│   ├── Header.js
-│   ├── Hero.js
-│   ├── About.js
-│   ├── Education.js
-│   ├── Experience.js
-│   ├── Skills.js
-│   ├── Projects.js
-│   ├── Contact.js
-│   └── Footer.js
-├── App.js
-├── index.js
-└── index.css
+portfolio/
+├── frontend/             # React + Vite client
+│   ├── public/
+│   │   ├── viraj1.jpg
+│   │   └── _redirects
+│   ├── src/
+│   │   ├── components/   # UI components
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+│   ├── index.html
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── tailwind.config.js
+│   └── vite.config.js
+│
+└── backend/              # Node.js + Express server
+    ├── .env
+    ├── package.json
+    └── server.js
 ```
 
-## Customization
+## Tech Stack
 
-- Update personal information in component files
-- Modify colors in `tailwind.config.js`
-- Add more projects in the Projects component
-- Update links in Footer and Projects sections
+- **Frontend**: React 18, Vite, Tailwind CSS, React Icons
+- **Backend**: Node.js, Express, Nodemailer, CORS, Dotenv
+
+## Getting Started
+
+### 1. Run Everything Concurrently (Root)
+
+From the root `portfolio/` folder:
+
+```bash
+# Run both frontend & backend together
+npm run dev
+```
+
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Backend API: [http://localhost:5000](http://localhost:5000)
+
+### 2. Or Run Separately
+
+#### Frontend (React + Vite)
+```bash
+cd frontend
+npm install
+npm run dev      # Start Vite dev server on port 3000
+npm run build    # Build production bundle in frontend/dist
+npm run preview  # Preview production build
+```
+
+#### Backend (Node + Express)
+```bash
+cd backend
+npm install
+npm run dev      # Start server with nodemon auto-reload
+npm start        # Start server with standard node
+```
+
+## Available Scripts (Root)
+
+- `npm run dev` - Runs both frontend and backend concurrently
+- `npm run dev:frontend` - Starts only the frontend Vite dev server
+- `npm run dev:backend` - Starts only the Express backend server
+- `npm run build` - Builds the frontend for production
+- `npm start` - Starts the backend server in production mode
 
 ## Contact
 

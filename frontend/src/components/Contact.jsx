@@ -24,7 +24,7 @@ const Contact = () => {
     setIsSubmitting(true);
     try {
       // Automatically switch between local server and Vercel Serverless Function
-      const endpoint = process.env.NODE_ENV === 'production' 
+      const endpoint = (import.meta.env?.PROD ?? false) 
         ? '/api/contact' 
         : 'http://localhost:5000/api/contact';
 
