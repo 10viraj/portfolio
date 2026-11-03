@@ -2,13 +2,14 @@
   "name": "viraj-portfolio",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "npm run dev",
-    "dev": "vite",
+    "dev": "npm run dev --prefix frontend",
     "dev:frontend": "npm run dev --prefix frontend",
     "dev:backend": "npm run dev --prefix backend",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "npm run build --prefix frontend",
+    "preview": "npm run preview --prefix frontend"
   },
   "dependencies": {
     "nodemailer": "^6.9.13",
