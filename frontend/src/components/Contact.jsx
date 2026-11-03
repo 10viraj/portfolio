@@ -42,15 +42,24 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      setStatus({ submitting: false, success: false, error: 'Please fill out all fields.' });
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedMessage = formData.message.trim();
+
+    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+      setStatus({ submitting: false, success: false, error: 'Please fill out all fields before sending.' });
       return;
     }
 
     setStatus({ submitting: true, success: false, error: null });
 
+    let sent = false;
+
+    // Attempt 1: Vercel serverless /api/contact endpoint (Direct SMTP to virajsomani10@gmail.com)
     try {
-      // Primary: Send to built-in Vite/Vercel /api/contact handler
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 6000);
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -58,25 +67,25 @@ const Contact = () => {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          message: formData.message.trim(),
+          name: trimmedName,
+          email: trimmedEmail,
+          message: trimmedMessage,
         }),
+        signal: controller.signal,
       });
 
+      clearTimeout(timeoutId);
+
       const result = await response.json().catch(() => ({}));
-
       if (response.ok && result.success) {
-        setStatus({ submitting: false, success: true, error: null });
-        setFormData({ name: '', email: '', message: '' });
-        return;
+        sent = true;
       }
-
-      // If primary endpoint fails, try secondary direct delivery
-      throw new Error(result.error || 'Primary endpoint failed, attempting fallback...');
     } catch (err) {
-      console.warn('Primary dispatch failed, using direct cloud delivery...', err);
+      console.warn('API endpoint unavailable or timed out, trying backup direct delivery...', err);
+    }
 
+    // Attempt 2: FormSubmit Direct AJAX API fallback (Deliver directly to virajsomani10@gmail.com)
+    if (!sent) {
       try {
         const fallbackRes = await fetch('https://formsubmit.co/ajax/virajsomani10@gmail.com', {
           method: 'POST',
@@ -85,29 +94,37 @@ const Contact = () => {
             Accept: 'application/json',
           },
           body: JSON.stringify({
-            name: formData.name.trim(),
-            email: formData.email.trim(),
-            message: formData.message.trim(),
-            _subject: `[Portfolio Contact] Message from ${formData.name.trim()}`,
+            name: trimmedName,
+            email: trimmedEmail,
+            message: trimmedMessage,
+            _subject: `[Portfolio Contact] New message from ${trimmedName}`,
+            _captcha: 'false',
+            _template: 'table',
           }),
         });
 
         const fallbackData = await fallbackRes.json().catch(() => ({}));
-
-        if (fallbackRes.ok && (fallbackData.success === 'true' || fallbackData.success === true)) {
-          setStatus({ submitting: false, success: true, error: null });
-          setFormData({ name: '', email: '', message: '' });
-          return;
+        if (
+          fallbackRes.ok &&
+          (fallbackData.success === 'true' ||
+            fallbackData.success === true ||
+            fallbackData.status === 'success')
+        ) {
+          sent = true;
         }
       } catch (fallbackErr) {
-        console.error('All dispatch methods exhausted:', fallbackErr);
+        console.error('Direct cloud delivery failed:', fallbackErr);
       }
+    }
 
-      // If both fail, let the user know
+    if (sent) {
+      setStatus({ submitting: false, success: true, error: null });
+      setFormData({ name: '', email: '', message: '' });
+    } else {
       setStatus({
         submitting: false,
         success: false,
-        error: 'Unable to send message right now. Please email virajsomani10@gmail.com directly.',
+        error: 'Unable to deliver message right now. Please check your internet connection or email virajsomani10@gmail.com directly.',
       });
     }
   };
