@@ -1,5 +1,5 @@
 {
-  "name": "portfolio",
+  "name": "viraj-portfolio",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -7,13 +7,17 @@
     "dev": "vite",
     "dev:frontend": "npm run dev --prefix frontend",
     "dev:backend": "npm run dev --prefix backend",
-    "build": "vite",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "nodemailer": "^6.9.13"
+    "nodemailer": "^6.9.13",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
     "concurrently": "^8.2.2"
   }
 }
