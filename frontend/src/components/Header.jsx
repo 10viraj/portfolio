@@ -30,9 +30,9 @@ const Header = ({ scrollToSection }) => {
           <span className="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors">
             Viraj Somani
           </span>
-          <span className="hidden sm:inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200/60">
-            Full-Stack Dev
-          </span>
+          {/* <span className="hidden sm:inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200/60">
+            Full-Stack Developer
+          </span> */}
         </button>
 
         {/* Desktop Navigation */}

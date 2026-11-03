@@ -12,61 +12,66 @@ app.use(cors());
 
 // Contact Route
 app.post('/api/contact', async (req, res) => {
-  const { name, email, message } = req.body;
+  const { name, email, message } = req.body || {};
 
   if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Please provide all required fields' });
+    return res.status(400).json({ error: 'Please provide all required fields (name, email, message).' });
   }
 
-  // Create transporter using Gmail
+  const EMAIL_USER = process.env.EMAIL_USER || 'virajsomani10@gmail.com';
+  const EMAIL_PASS = (process.env.EMAIL_PASS || 'pqyx lhtq qcgi jigk').replace(/\s+/g, '');
+
+  // Create transporter using Gmail SMTP
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS, // This MUST be an App Password, not your standard login password
+      user: EMAIL_USER,
+      pass: EMAIL_PASS,
     },
   });
 
-  // Custom HTML Email Formatting
+  // HTML Email Template
   const mailOptions = {
-    from: `"${name}" <${process.env.EMAIL_USER}>`,
+    from: `"${name}" <${EMAIL_USER}>`,
     replyTo: email,
-    to: process.env.EMAIL_USER, // The email you want to receive the messages at
-    subject: `Portfolio Contact from ${name}`,
+    to: EMAIL_USER, // The email you want to receive the messages at
+    subject: `[Portfolio Contact] New message from ${name}`,
     html: `
-      <div style="font-family: 'Inter', 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; background-color: #0f172a; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+      <div style="font-family: 'Inter', -apple-system, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
         <!-- Header -->
-        <div style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); padding: 30px 40px; text-align: center;">
-          <h2 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 600; letter-spacing: 0.5px;">New Portfolio Inquiry</h2>
+        <div style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); padding: 28px 36px; text-align: center;">
+          <h2 style="color: #ffffff; margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.02em;">New Message from Portfolio Website</h2>
+          <p style="color: #dbeafe; margin: 6px 0 0 0; font-size: 13px;">A recruiter or client submitted the contact form.</p>
         </div>
         
-        <!-- Body -->
-        <div style="padding: 40px; background-color: #1e293b;">
-          
-          <!-- Contact Details Card -->
-          <div style="background-color: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 25px; margin-bottom: 30px;">
-            <p style="margin: 0 0 15px 0; font-size: 14px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Sender Details</p>
-            
-            <p style="margin: 0 0 10px 0; font-size: 16px; color: #cbd5e1;">
-              <strong style="color: #f8fafc; display: inline-block; width: 60px;">Name:</strong> ${name}
+        <!-- Content -->
+        <div style="padding: 32px 36px; color: #1e293b;">
+          <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <p style="margin: 0 0 10px 0; font-size: 14px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Sender Information</p>
+            <p style="margin: 0 0 8px 0; font-size: 15px; color: #0f172a;">
+              <strong>Name:</strong> ${name}
             </p>
-            <p style="margin: 0; font-size: 16px; color: #cbd5e1;">
-              <strong style="color: #f8fafc; display: inline-block; width: 60px;">Email:</strong> 
-              <a href="mailto:${email}" style="color: #60a5fa; text-decoration: none;">${email}</a>
+            <p style="margin: 0; font-size: 15px; color: #0f172a;">
+              <strong>Email:</strong> <a href="mailto:${email}" style="color: #2563eb; text-decoration: none; font-weight: 600;">${email}</a>
             </p>
           </div>
 
-          <!-- Message Card -->
-          <div style="background-color: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 25px;">
-            <p style="margin: 0 0 15px 0; font-size: 14px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Message</p>
-            <p style="margin: 0; white-space: pre-wrap; color: #e2e8f0; font-size: 15px; line-height: 1.8;">${message}</p>
+          <!-- Message Body -->
+          <div style="border-left: 4px solid #2563eb; padding-left: 16px; margin-bottom: 24px;">
+            <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Message / Inquiry Details</p>
+            <p style="margin: 0; white-space: pre-wrap; font-size: 15px; line-height: 1.6; color: #1e293b;">${message}</p>
           </div>
 
+          <div style="text-align: center; margin-top: 28px;">
+            <a href="mailto:${email}?subject=Re:%20Portfolio%20Inquiry" style="display: inline-block; background-color: #2563eb; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600;">
+              Reply directly to ${email} &rarr;
+            </a>
+          </div>
         </div>
-        
+
         <!-- Footer -->
-        <div style="padding: 20px; text-align: center; background-color: #0f172a; border-top: 1px solid #1e293b;">
-          <p style="margin: 0; color: #64748b; font-size: 13px;">This email was sent securely from your portfolio contact form.</p>
+        <div style="padding: 16px 36px; background-color: #f8fafc; border-top: 1px solid #e2e8f0; text-align: center;">
+          <p style="margin: 0; font-size: 12px; color: #94a3b8;">This email was sent from your portfolio contact form at portfolio-fryl.vercel.app</p>
         </div>
       </div>
     `,
@@ -77,7 +82,7 @@ app.post('/api/contact', async (req, res) => {
     res.status(200).json({ success: true, message: 'Email sent successfully!' });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).json({ error: 'Failed to send email' });
+    res.status(500).json({ error: 'Failed to send email. Please email virajsomani10@gmail.com directly.' });
   }
 });
 

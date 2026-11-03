@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaArrowUp } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowUp, FaDownload, FaFilePdf, FaExternalLinkAlt } from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -41,18 +41,20 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Connect & Resume */}
+          {/* Connect & Resume Download */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-3">
-              Connect
+              Resume & Profiles
             </h4>
-            <div className="flex items-center gap-3 mb-4">
+
+            {/* Social Icons */}
+            <div className="flex items-center gap-2.5 mb-4">
               <a
                 href="https://github.com/10viraj"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 rounded-lg transition-colors"
-                aria-label="GitHub"
+                aria-label="GitHub Profile"
               >
                 <FaGithub size={16} />
               </a>
@@ -61,26 +63,42 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg transition-colors"
-                aria-label="LinkedIn"
+                aria-label="LinkedIn Profile"
               >
                 <FaLinkedin size={16} />
               </a>
               <a
                 href="mailto:virajsomani10@gmail.com"
                 className="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-blue-600 rounded-lg transition-colors"
-                aria-label="Email"
+                aria-label="Send Email"
               >
                 <FaEnvelope size={16} />
               </a>
             </div>
 
-            <a
-              href="/Viraj_Somani_Resume.pdf"
-              download="Viraj_Somani_Resume.pdf"
-              className="inline-flex items-center text-xs font-semibold text-blue-600 hover:text-blue-700 hover:underline"
-            >
-              &darr; Download Resume (PDF)
-            </a>
+            {/* Prominent Resume Download Button */}
+            <div className="space-y-2">
+              <a
+                href="/Viraj_Somani_Resume.pdf"
+                download="Viraj_Somani_Resume.pdf"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-xs transition-colors w-full justify-center sm:w-auto"
+              >
+                <FaDownload className="text-2xs" />
+                <span>Download Resume (PDF)</span>
+              </a>
+
+              <div>
+                <a
+                  href="/Viraj_Somani_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-2xs font-medium text-slate-500 hover:text-blue-600 transition-colors"
+                >
+                  <FaExternalLinkAlt className="text-3xs" />
+                  <span>Preview in browser</span>
+                </a>
+              </div>
+            </div>
           </div>
 
         </div>

@@ -8,7 +8,8 @@ import {
   FaLinkedin,
   FaGithub,
   FaSpinner,
-  FaExclamationCircle,
+  FaPaperPlane,
+  FaCopy,
 } from 'react-icons/fa';
 
 const Contact = () => {
@@ -22,6 +23,7 @@ const Contact = () => {
     success: false,
     error: null,
   });
+  const [copied, setCopied] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +31,12 @@ const Contact = () => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('virajsomani10@gmail.com');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
   };
 
   const handleSubmit = async (e) => {
@@ -42,10 +50,8 @@ const Contact = () => {
     setStatus({ submitting: true, success: false, error: null });
 
     try {
-      // In production or via Vite proxy, endpoint is /api/contact
-      const endpoint = import.meta.env?.PROD ? '/api/contact' : 'http://localhost:5000/api/contact';
-
-      const response = await fetch(endpoint, {
+      // Primary: Send to built-in Vite/Vercel /api/contact handler
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,27 +64,50 @@ const Contact = () => {
         }),
       });
 
-      const result = await response.json();
+      const result = await response.json().catch(() => ({}));
 
       if (response.ok && result.success) {
         setStatus({ submitting: false, success: true, error: null });
         setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => {
-          setStatus((prev) => ({ ...prev, success: false }));
-        }, 5000);
-      } else {
-        setStatus({
-          submitting: false,
-          success: false,
-          error: result.error || 'Failed to send message. Please reach out directly via email.',
-        });
+        return;
       }
+
+      // If primary endpoint fails, try secondary direct delivery
+      throw new Error(result.error || 'Primary endpoint failed, attempting fallback...');
     } catch (err) {
-      console.error('Contact form submission error:', err);
+      console.warn('Primary dispatch failed, using direct cloud delivery...', err);
+
+      try {
+        const fallbackRes = await fetch('https://formsubmit.co/ajax/virajsomani10@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            message: formData.message.trim(),
+            _subject: `[Portfolio Contact] Message from ${formData.name.trim()}`,
+          }),
+        });
+
+        const fallbackData = await fallbackRes.json().catch(() => ({}));
+
+        if (fallbackRes.ok && (fallbackData.success === 'true' || fallbackData.success === true)) {
+          setStatus({ submitting: false, success: true, error: null });
+          setFormData({ name: '', email: '', message: '' });
+          return;
+        }
+      } catch (fallbackErr) {
+        console.error('All dispatch methods exhausted:', fallbackErr);
+      }
+
+      // If both fail, let the user know
       setStatus({
         submitting: false,
         success: false,
-        error: 'Unable to reach backend server. Please email virajsomani10@gmail.com directly.',
+        error: 'Unable to send message right now. Please email virajsomani10@gmail.com directly.',
       });
     }
   };
@@ -93,7 +122,7 @@ const Contact = () => {
           </span>
           <h2 className="text-headline-lg mt-3 mb-4">Contact Me</h2>
           <p className="text-body-lg">
-            Looking for a dedicated Full-Stack or Backend Developer? Let's talk.
+            Looking for a dedicated Full-Stack or Backend Developer? Send a message and it will be delivered directly to my email address.
           </p>
         </div>
 
@@ -102,10 +131,10 @@ const Contact = () => {
           <div className="lg:col-span-5 space-y-4">
             <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/90 shadow-xs">
               <h3 className="text-lg font-bold text-slate-900 mb-1">
-                Contact Information
+                Direct Contact Details
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 mb-6">
-                Feel free to contact me via email, phone, or LinkedIn.
+                All messages sent through this form arrive directly in my personal inbox.
               </p>
 
               <div className="space-y-4">
@@ -118,21 +147,40 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Email */}
-                <a
-                  href="mailto:virajsomani10@gmail.com"
-                  className="flex items-start gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-colors group"
-                >
-                  <div className="p-2.5 bg-blue-50 text-blue-600 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors flex-shrink-0">
-                    <FaEnvelope size={18} />
+                {/* Email with copy button */}
+                <div className="p-3 rounded-xl hover:bg-slate-50 transition-colors border border-slate-100">
+                  <div className="flex items-start justify-between gap-2">
+                    <a
+                      href="mailto:virajsomani10@gmail.com"
+                      className="flex items-start gap-3.5 group"
+                    >
+                      <div className="p-2.5 bg-blue-50 text-blue-600 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors flex-shrink-0">
+                        <FaEnvelope size={18} />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Email Address</h4>
+                        <p className="text-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                          virajsomani10@gmail.com
+                        </p>
+                      </div>
+                    </a>
+
+                    <button
+                      type="button"
+                      onClick={handleCopyEmail}
+                      className="p-2 text-slate-400 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
+                      title="Copy email to clipboard"
+                      aria-label="Copy email"
+                    >
+                      {copied ? <FaCheck className="text-emerald-600 text-xs" /> : <FaCopy className="text-xs" />}
+                    </button>
                   </div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Email</h4>
-                    <p className="text-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
-                      virajsomani10@gmail.com
+                  {copied && (
+                    <p className="text-2xs text-emerald-600 font-semibold mt-1 pl-12 animate-fade-in">
+                      Copied virajsomani10@gmail.com to clipboard!
                     </p>
-                  </div>
-                </a>
+                  )}
+                </div>
 
                 {/* Phone */}
                 <a
@@ -167,7 +215,7 @@ const Contact = () => {
               {/* Profiles */}
               <div className="pt-6 mt-6 border-t border-slate-100">
                 <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
-                  Developer Profiles
+                  Professional Profiles
                 </p>
                 <div className="flex items-center gap-3">
                   <a
@@ -193,43 +241,38 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Right Column: Working Contact Form */}
+          {/* Right Column: Instant Working Contact Form */}
           <div className="lg:col-span-7">
             <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/90 shadow-xs">
               <h3 className="text-lg font-bold text-slate-900 mb-2">
                 Send a Message
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 mb-6">
-                Fill in the form below and I will get back to you as soon as possible.
+                Fill in the form below and your message will be sent directly to <strong>virajsomani10@gmail.com</strong>.
               </p>
 
-              {/* Status messages */}
+              {/* Status banner: Success */}
               {status.success && (
-                <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center gap-3">
+                <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center gap-3 animate-fade-in">
                   <FaCheckCircle className="text-emerald-600 flex-shrink-0 text-base" />
-                  <span>Thank you! Your message has been sent successfully. I will respond promptly.</span>
+                  <div>
+                    <p className="font-bold">Message Sent Successfully!</p>
+                    <p className="text-xs text-emerald-700 mt-0.5">Your email was delivered directly to virajsomani10@gmail.com. I will get back to you shortly.</p>
+                  </div>
                 </div>
               )}
 
+              {/* Status banner: Error */}
               {status.error && (
-                <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs sm:text-sm flex items-start gap-2.5">
-                  <FaExclamationCircle className="text-amber-600 mt-0.5 flex-shrink-0 text-base" />
-                  <div>
-                    <p className="font-semibold">{status.error}</p>
-                    <p className="mt-1">
-                      You can also email directly to:{' '}
-                      <a href="mailto:virajsomani10@gmail.com" className="underline font-bold">
-                        virajsomani10@gmail.com
-                      </a>
-                    </p>
-                  </div>
+                <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs sm:text-sm animate-fade-in">
+                  <p className="font-semibold">{status.error}</p>
                 </div>
               )}
 
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
                 <div>
                   <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                    Your Name <span className="text-red-500">*</span>
+                    Your Name / Company Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     id="name"
@@ -239,13 +282,13 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="e.g. John Doe / Tech Recruiter"
+                    placeholder="e.g. John Doe / Tech Recruiter / Company Name"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                    Email Address <span className="text-red-500">*</span>
+                    Your Email Address <span className="text-red-500">*</span>
                   </label>
                   <input
                     id="email"
@@ -275,27 +318,36 @@ const Contact = () => {
                   ></textarea>
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={status.submitting}
-                  className={`btn-primary w-full justify-center ${
-                    status.submitting ? 'opacity-70 cursor-not-allowed' : ''
-                  }`}
-                >
-                  {status.submitting ? (
-                    <>
-                      <FaSpinner className="animate-spin" />
-                      <span>Sending Message...</span>
-                    </>
-                  ) : status.success ? (
-                    <>
-                      <FaCheck />
-                      <span>Message Sent!</span>
-                    </>
-                  ) : (
-                    'Send Message'
-                  )}
-                </button>
+                <div className="space-y-3">
+                  <button
+                    type="submit"
+                    disabled={status.submitting}
+                    className={`btn-primary w-full justify-center ${
+                      status.submitting ? 'opacity-70 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    {status.submitting ? (
+                      <>
+                        <FaSpinner className="animate-spin" />
+                        <span>Sending Directly to virajsomani10@gmail.com...</span>
+                      </>
+                    ) : status.success ? (
+                      <>
+                        <FaCheck />
+                        <span>Sent!</span>
+                      </>
+                    ) : (
+                      <>
+                        <FaPaperPlane className="text-xs" />
+                        <span>Send Message</span>
+                      </>
+                    )}
+                  </button>
+
+                  <p className="text-center text-2xs text-slate-400">
+                    Sends directly to virajsomani10@gmail.com &bull; No permissions needed
+                  </p>
+                </div>
               </form>
             </div>
           </div>

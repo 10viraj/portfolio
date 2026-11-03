@@ -24,6 +24,7 @@ import {
   SiStripe,
   SiRazorpay,
   SiSocketdotio,
+  SiCanva
 } from 'react-icons/si';
 
 const Skills = () => {
@@ -73,6 +74,7 @@ const Skills = () => {
         { name: 'GitHub', icon: <FaGithub className="text-slate-900" /> },
         { name: 'Postman', icon: <SiPostman className="text-[#FF6C37]" /> },
         { name: 'Figma', icon: <FaFigma className="text-[#F24E1E]" /> },
+        { name: 'Canva', icon: <SiCanva className="text-[#00C4CC]" /> },
       ],
     },
     {
@@ -105,9 +107,8 @@ const Skills = () => {
           {skillCategories.map((cat, index) => (
             <div
               key={index}
-              className={`bg-white rounded-2xl border border-slate-200/90 p-6 shadow-xs hover:shadow-md transition-shadow ${
-                index === 1 ? 'md:col-span-2 lg:col-span-1' : ''
-              }`}
+              className={`bg-white rounded-2xl border border-slate-200/90 p-6 shadow-xs hover:shadow-md transition-shadow ${index === 1 ? 'md:col-span-2 lg:col-span-1' : ''
+                }`}
             >
               <div className="mb-4">
                 <h3 className="text-lg font-bold text-slate-900">
