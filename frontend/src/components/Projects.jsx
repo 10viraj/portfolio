@@ -84,7 +84,7 @@ const Projects = () => {
         'Responsive mobile-to-desktop design optimized for recruiter reviews',
       ],
       github: 'https://github.com/10viraj/portfolio',
-      liveDemo: 'https://portfolio-fryl.vercel.app/',
+      liveDemo: 'https://viraj-somani-portfolio.vercel.app/',
       highlight: false,
     },
   ];
